@@ -10,6 +10,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+
+
 public class WordCount {
   public static class TokenizerMapper
   extends Mapper < Object, Text, Text, IntWritable > {
@@ -43,6 +45,7 @@ public class WordCount {
   
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
+	conf.set("yarn.resourcemanager.address", "127.0.0.1:8032");
     Job job = Job.getInstance(conf, "word count");
     job.setJarByClass(WordCount.class);
     job.setMapperClass(TokenizerMapper.class);
